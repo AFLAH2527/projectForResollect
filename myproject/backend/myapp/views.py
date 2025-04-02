@@ -9,15 +9,33 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from django.contrib.auth.models import User
-from rest_framework import status
+from django.db.models import Q
+from rest_framework import status, viewsets
 
 class AuthorViewSet(viewsets.ModelViewSet):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
+    permission_classes = [AllowAny]
 
 class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
+    permission_classes = [AllowAny]
+
+    # def list(self, request):
+    #     search_query = request.GET.get("search", "")
+    #     books = Book.objects.filter(
+    #         Q(title__icontains=search_query) | Q(author__icontains=search_query)
+    #     )
+
+    #     grouped_books = {}
+    #     for book in books:
+    #         category = book.category
+    #         if category not in grouped_books:
+    #             grouped_books[category] = []
+    #         grouped_books[category].append(BookSerializer(book).data)
+
+    #     return Response(grouped_books)
 
 class MemberViewSet(viewsets.ModelViewSet):
     queryset = Member.objects.all()

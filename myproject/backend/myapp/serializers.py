@@ -7,11 +7,12 @@ class AuthorSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class BookSerializer(serializers.ModelSerializer):
-    author_name = serializers.ReadOnlyField(source='author.name')
+    category_name = serializers.CharField(source="category.name", read_only=True)
+    author_name = serializers.CharField(source="author.name", read_only=True)
 
     class Meta:
         model = Book
-        fields = '__all__'
+        fields = ["id", "title", "author", "author_name", "category", "category_name", "published_date", "available"]
 
 class MemberSerializer(serializers.ModelSerializer):
     class Meta:
