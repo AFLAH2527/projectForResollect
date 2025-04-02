@@ -1,12 +1,13 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import AuthorViewSet, BookViewSet, MemberViewSet, TransactionViewSet
+from .views import AuthorViewSet, BookViewSet, MemberViewSet, TransactionViewSet, CategoryViewSet
 
 from rest_framework_simplejwt.views import TokenRefreshView
 from .views import CustomTokenObtainPairView, register
 
 router = DefaultRouter()
 router.register(r'authors', AuthorViewSet)
+router.register(r'categories', CategoryViewSet)
 router.register(r'books', BookViewSet)
 router.register(r'members', MemberViewSet)
 router.register(r'transactions', TransactionViewSet)

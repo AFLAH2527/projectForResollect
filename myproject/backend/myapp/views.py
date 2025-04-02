@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .models import Author, Book, Member, Transaction
-from .serializers import AuthorSerializer, BookSerializer, MemberSerializer, TransactionSerializer
+from .models import Author, Book, Member, Transaction, Category
+from .serializers import AuthorSerializer, BookSerializer, MemberSerializer, TransactionSerializer, CategorySerializer
 
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -15,6 +15,11 @@ from rest_framework import status, viewsets
 class AuthorViewSet(viewsets.ModelViewSet):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
+    permission_classes = [AllowAny]
+
+class CategoryViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
     permission_classes = [AllowAny]
 
 class BookViewSet(viewsets.ModelViewSet):
@@ -40,10 +45,12 @@ class BookViewSet(viewsets.ModelViewSet):
 class MemberViewSet(viewsets.ModelViewSet):
     queryset = Member.objects.all()
     serializer_class = MemberSerializer
+    permission_classes = [AllowAny]
 
 class TransactionViewSet(viewsets.ModelViewSet):
     queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
+    permission_classes = [AllowAny]
 
 class CustomTokenObtainPairView(TokenObtainPairView):
     def post(self, request, *args, **kwargs):
