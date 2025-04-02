@@ -13,16 +13,18 @@ import TransactionList from "./components/TrasactionList";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/books" element={<Books />} />
-        <Route path="/members" element={<Members />} />
-        <Route path="/transactions" element={<TransactionList />} />
-      </Routes>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/books" element={<Books />} />
+          <Route path="/members" element={<Members />} />
+          <Route path="/transactions" element={<TransactionList />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
 
