@@ -15,7 +15,7 @@ const Home = () => {
 
       {user ? (
         <>
-          <p>Welcome, {user.username}!</p>
+          <p>Welcome, {user.username || "Guest"}!</p> 
           <button onClick={handleLogout}>Logout</button>
         </>
       ) : (

@@ -4,6 +4,7 @@ from .models import Author, Book, Member, Transaction
 from .serializers import AuthorSerializer, BookSerializer, MemberSerializer, TransactionSerializer
 
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
@@ -26,14 +27,33 @@ class TransactionViewSet(viewsets.ModelViewSet):
     queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
 
-
 class CustomTokenObtainPairView(TokenObtainPairView):
     def post(self, request, *args, **kwargs):
         response = super().post(request, *args, **kwargs)
-        return Response({"token": response.data['access'], "refresh": response.data['refresh']})
+        
+        if 'access' in response.data:
+            access_token = response.data['access']
+            refresh_token = response.data['refresh']
 
+            user = User.objects.get(username=request.data["username"])
+
+            refresh = RefreshToken.for_user(user)
+            refresh["username"] = user.username
+
+            return Response({
+                "token": str(refresh.access_token),
+                "refresh": str(refresh),
+                "user": {
+                    "id": user.id,
+                    "username": user.username
+                }
+            })
+
+        return Response({"error": "Invalid credentials"}, status=400)
+    
+    
 @api_view(["POST"])
-@permission_classes([AllowAny])  # 🔹 Allow anyone to register
+@permission_classes([AllowAny])
 def register(request):
     username = request.data.get("username")
     password = request.data.get("password")

@@ -6,8 +6,11 @@ const API_URL = "http://127.0.0.1:8000/api/auth/";
 export const login = async (username, password) => {
   try {
     const response = await axios.post(`${API_URL}login/`, { username, password });
+    
     localStorage.setItem("token", response.data.token);
-    return response.data;
+    localStorage.setItem("refresh", response.data.refresh);
+
+    return response.data.user;
   } catch (error) {
     console.error("Login error:", error);
     return null;
@@ -31,5 +34,14 @@ export const logout = () => {
 export const getCurrentUser = () => {
   const token = localStorage.getItem("token");
   if (!token) return null;
-  return jwtDecode(token);
+
+  try {
+    const decoded = jwtDecode(token);
+    console.log("Decoded JWT:", decoded); // ✅ Debugging: Check what's inside the token
+    return decoded.username ? { username: decoded.username } : null;
+  } catch (error) {
+    console.error("JWT Decode Error:", error);
+    return null;
+  }
 };
+
