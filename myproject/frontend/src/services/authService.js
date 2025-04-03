@@ -1,7 +1,7 @@
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 
-const API_URL = "http://127.0.0.1:8000/api/auth/";
+const API_URL = "https://library-frontend-7y6j.onrender.com/api/auth/";
 
 export const login = async (username, password) => {
   try {

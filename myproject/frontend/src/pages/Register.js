@@ -21,7 +21,7 @@ const Register = () => {
     setSuccess("");
 
     try {
-      const response = await axios.post("http://127.0.0.1:8000/api/auth/register/", formData);
+      const response = await axios.post("https://library-frontend-7y6j.onrender.com/api/auth/register/", formData);
       setSuccess("Registration successful! Redirecting to login...");
       setTimeout(() => navigate("/login"), 2000); // Redirect after 2s
     } catch (err) {

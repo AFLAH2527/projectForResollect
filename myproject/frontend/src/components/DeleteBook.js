@@ -2,7 +2,7 @@ import axios from "axios";
 
 const DeleteBook = ({ id, fetchBooks }) => {
   const handleDelete = async () => {
-    await axios.delete(`http://127.0.0.1:8000/api/books/${id}/`);
+    await axios.delete(`https://library-frontend-7y6j.onrender.com/api/books/${id}/`);
     fetchBooks();
   };
 

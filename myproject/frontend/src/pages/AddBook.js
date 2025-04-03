@@ -21,7 +21,7 @@ const AddBook = () => {
 
   const fetchAuthors = async () => {
     try {
-      const response = await axios.get("http://127.0.0.1:8000/api/authors/");
+      const response = await axios.get("https://library-frontend-7y6j.onrender.com/api/authors/");
       setAuthors(response.data);
     } catch (error) {
       console.error("Error fetching authors:", error);
@@ -30,7 +30,7 @@ const AddBook = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get("http://127.0.0.1:8000/api/categories/");
+      const response = await axios.get("https://library-frontend-7y6j.onrender.com/api/categories/");
       setCategories(response.data);
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -40,7 +40,7 @@ const AddBook = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://127.0.0.1:8000/api/books/", {
+      await axios.post("https://library-frontend-7y6j.onrender.com/api/books/", {
         title,
         author,
         category,

@@ -18,7 +18,7 @@ const Home = () => {
     const token = localStorage.getItem("token"); 
 
     try {
-      const response = await axios.get("http://127.0.0.1:8000/api/books/", {
+      const response = await axios.get("https://library-frontend-7y6j.onrender.com/api/books/", {
         headers: {
           Authorization: `Bearer ${token}`, 
         },
@@ -46,7 +46,6 @@ const Home = () => {
     <div>
       <h1>Library Management System</h1>
       <nav>
-        <Link to="/books">Books</Link> | 
         <Link to="/members">Members</Link> | 
         <Link to="/transactions">Transactions</Link>
       </nav>

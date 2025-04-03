@@ -16,7 +16,7 @@ const BookForm = ({ fetchBooks }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.post("http://127.0.0.1:8000/api/books/", book);
+    await axios.post("https://library-frontend-7y6j.onrender.com/api//books/", book);
     fetchBooks();
     setBook({ title: "", author: "", category: "", published_date: "", available: true });
   };

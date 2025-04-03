@@ -4,7 +4,6 @@ import { AuthProvider } from "./context/AuthContext";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Books from "./pages/Books";
 import AddBook from "./pages/AddBook";
 import UpdateBook from "./pages/UpdateBook";
 import DeleteBook from "./pages/DeleteBook";
@@ -25,7 +24,6 @@ function App() {
           <Route path="/register" element={<Register />} />
 
           {/* 🔹 Books CRUD */}
-          <Route path="/books" element={<Books />} />
           <Route path="/books/add" element={<AddBook />} />
           <Route path="/books/update/:id" element={<UpdateBook />} />
           <Route path="/books/delete/:id" element={<DeleteBook />} />
