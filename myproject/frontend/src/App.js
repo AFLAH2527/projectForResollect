@@ -9,7 +9,8 @@ import UpdateBook from "./pages/UpdateBook";
 import DeleteBook from "./pages/DeleteBook";
 import Members from "./pages/Members";
 import TransactionList from "./components/TransactionList";
-import BookLandingPage from "./pages/Home"; // ✅ Landing page with filtering & bucketing
+import BookLandingPage from "./pages/Home";
+import "./styles/library.css";
 
 function App() {
   return (

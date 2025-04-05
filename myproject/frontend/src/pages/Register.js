@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -30,15 +30,20 @@ const Register = () => {
   };
 
   return (
-    <div>
-      <h2>Register</h2>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      {success && <p style={{ color: "green" }}>{success}</p>}
-      <form onSubmit={handleSubmit}>
-        <input type="text" name="username" placeholder="Username" onChange={handleChange} required />
-        <input type="password" name="password" placeholder="Password" onChange={handleChange} required />
-        <button type="submit">Register</button>
-      </form>
+    <div className="page-wrapper">
+      <div className="auth-container">
+        <h2 className="text-center">Register</h2>
+        {error && <p className="message error">{error}</p>}
+        {success && <p className="message success">{success}</p>}
+        <form className="auth-form" onSubmit={handleSubmit}>
+          <input type="text" name="username" placeholder="Username" onChange={handleChange} required />
+          <input type="password" name="password" placeholder="Password" onChange={handleChange} required />
+          <button type="submit">Register</button>
+          <div className="auth-links">
+            <p>Already have an account? <Link to="/login">Login</Link></p>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

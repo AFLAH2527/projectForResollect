@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import axios from "axios";
-import "../styles/Home.css"; 
 
 const Home = () => {
   const { user, handleLogout } = useContext(AuthContext);
@@ -44,32 +43,35 @@ const Home = () => {
   }, {});
 
   return (
-    <div>
+    <div className="page-wrapper">
       <h1>Library Management System</h1>
       <nav>
-        <Link to="/members">Members</Link> | 
+        <Link to="/members">Members</Link>
         <Link to="/transactions">Transactions</Link>
       </nav>
 
       {user ? (
         <>
-          <p>Welcome, {user.username || "Guest"}!</p>
-          <button onClick={handleLogout}>Logout</button>
+          <div className="welcome-section">
+            <p className="welcome-message">Welcome, {user.username || "Guest"}!</p>
+            <button className="logout-button" onClick={handleLogout}>Logout</button>
+          </div>
 
-          {/* Search Bar */}
-          <input
-            type="text"
-            placeholder="Search books..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
+          <div className="search-bar">
+            <input
+              type="text"
+              placeholder="Search books..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
 
           {/* Display Books by Category */}
           {Object.keys(bucketedBooks).length > 0 ? (
             Object.keys(bucketedBooks).map((category) => (
-              <div key={category}>
+              <div className="category-section" key={category}>
                 <h2>{category}</h2>
-                <table border="1">
+                <table>
                   <thead>
                     <tr>
                       <th>Title</th>
@@ -86,18 +88,16 @@ const Home = () => {
                         <td>{book.author_name}</td>
                         <td>{book.published_date}</td>
                         <td>
-                          {book.available ? (
-                            <span style={{ color: "green" }}>Available</span>
-                          ) : (
-                            <span style={{ color: "red" }}>Not Available</span>
-                          )}
+                          <span className={book.available ? "book-availability available" : "book-availability not-available"}>
+                            {book.available ? "Available" : "Not Available"}
+                          </span>
                         </td>
-                        <td>
+                        <td className="action-buttons">
                           <Link to={`/books/update/${book.id}`}>
-                            <button>Edit</button>
+                            <button className="edit-button">Edit</button>
                           </Link>
                           <Link to={`/books/delete/${book.id}`}>
-                            <button>Delete</button>
+                            <button className="delete-button">Delete</button>
                           </Link>
                         </td>
                       </tr>
@@ -107,24 +107,28 @@ const Home = () => {
               </div>
             ))
           ) : (
-            <p>No books available.</p>
+            <p className="text-center">No books available.</p>
           )}
 
           {/* Add Book Button */}
-          <Link to="/books/add">
-            <button>Add New Book</button>
-          </Link>
+          <div className="text-center">
+            <Link to="/books/add" className="add-book-button">
+              Add New Book
+            </Link>
+          </div>
         </>
       ) : (
-        <>
-          <p>Please log in or register to access the library.</p>
-          <Link to="/login">
-            <button>Login</button>
-          </Link>
-          <Link to="/register">
-            <button>Register</button>
-          </Link>
-        </>
+        <div className="auth-container">
+          <p className="text-center mb-3">Please log in or register to access the library.</p>
+          <div className="flex justify-between">
+            <Link to="/login">
+              <button>Login</button>
+            </Link>
+            <Link to="/register">
+              <button>Register</button>
+            </Link>
+          </div>
+        </div>
       )}
     </div>
   );

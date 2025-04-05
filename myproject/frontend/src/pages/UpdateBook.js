@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 
-import "../styles/UpdateBook.css";
 
 const UpdateBook = () => {
   const { id } = useParams();
@@ -71,58 +70,73 @@ const UpdateBook = () => {
   };
 
   return (
-    <div>
-      <h2>Update Book</h2>
+    <div className="page-wrapper">
+      <h2 className="text-center">Update Book</h2>
       <form onSubmit={handleUpdate}>
-        {/* Title */}
-        <input
-          type="text"
-          placeholder="Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-        />
-
-        {/* Author Dropdown */}
-        <select value={author} onChange={(e) => setAuthor(e.target.value)} required>
-          <option value="">Select Author</option>
-          {authors.map((a) => (
-            <option key={a.id} value={a.id}>
-              {a.name}
-            </option>
-          ))}
-        </select>
-
-        {/* Category Dropdown */}
-        <select value={category} onChange={(e) => setCategory(e.target.value)} required>
-          <option value="">Select Category</option>
-          {categories.map((c) => (
-            <option key={c.id} value={c.id}>
-              {c.name}
-            </option>
-          ))}
-        </select>
-
-        {/* Published Date */}
-        <input
-          type="date"
-          value={publishedDate}
-          onChange={(e) => setPublishedDate(e.target.value)}
-          required
-        />
-
-        {/* Availability Checkbox */}
-        <label>
+        {/* Similar structure to AddBook.js */}
+        <div className="form-group">
+          <label htmlFor="title">Title</label>
           <input
+            id="title"
+            type="text"
+            placeholder="Book Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="author">Author</label>
+          <select id="author" value={author} onChange={(e) => setAuthor(e.target.value)} required>
+            <option value="">Select Author</option>
+            {authors.map((a) => (
+              <option key={a.id} value={a.id}>
+                {a.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="category">Category</label>
+          <select id="category" value={category} onChange={(e) => setCategory(e.target.value)} required>
+            <option value="">Select Category</option>
+            {categories.map((c) => (
+              <option key={c.id} value={c.id}>
+                {c.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="publishedDate">Published Date</label>
+          <input
+            id="publishedDate"
+            type="date"
+            value={publishedDate}
+            onChange={(e) => setPublishedDate(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="checkbox-container mb-3">
+          <input
+            id="available"
             type="checkbox"
             checked={available}
             onChange={(e) => setAvailable(e.target.checked)}
           />
-          Available
-        </label>
+          <label htmlFor="available" className="mb-0">Available</label>
+        </div>
 
-        {/* Submit Button */}
-        <button type="submit">Update Book</button>
+        <div className="text-center">
+          <button type="submit" className="success">Update Book</button>
+          <Link to="/">
+            <button type="button" className="secondary">Cancel</button>
+          </Link>
+        </div>
       </form>
     </div>
   );

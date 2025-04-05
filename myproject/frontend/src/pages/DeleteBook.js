@@ -16,10 +16,14 @@ const DeleteBook = () => {
   };
 
   return (
-    <div>
-      <h2>Are you sure you want to delete this book?</h2>
-      <button onClick={handleDelete}>Yes, Delete</button>
-      <button onClick={() => navigate("/")}>Cancel</button>
+    <div className="page-wrapper">
+      <div className="delete-confirmation">
+        <h2>Are you sure you want to delete this book?</h2>
+        <div className="button-group">
+          <button className="danger" onClick={handleDelete}>Yes, Delete</button>
+          <button className="secondary" onClick={() => navigate("/")}>Cancel</button>
+        </div>
+      </div>
     </div>
   );
 };
